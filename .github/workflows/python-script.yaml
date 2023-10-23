@@ -1,0 +1,22 @@
+name: Run Python Script
+
+on:
+  schedule:
+    - cron: '0 */4 * * * '  # Schedule to run daily at midnight UTC
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.11  # Change to your desired Python version
+
+    - name: Run Python Script
+      run: |
+        python twitter.py

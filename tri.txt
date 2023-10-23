@@ -1,0 +1,6 @@
+client_id = "US16ZTljU0Y5LUUwOEg0RXFHTzg6MTpjaQ"
+client_secret = "KOhSjsyFcQHXmaiLFmZ_oHzfYIFRNAtKX3PV2a3kU6P9oZOvbk"
+consumer_key = "3xL2RlNYyUt58ZnLwqSWVYI0U"
+consumer_secret = "MVbQXC7y3I54dkzHJlgsa2xBD8jzjc86oicEBkYFYsFTcbEMnK"
+access_token = "1341402597295611905-2GWIBl1CNDco8C1wuU5yyAkZse5eYW"
+access_token_secret = "oVWCiFXhJLoSX2DtcxHIAGeUrt0Zhu8oLz7Pl9p5ofzIv"
