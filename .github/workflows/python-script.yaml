@@ -20,6 +20,14 @@ jobs:
             python-version: '3.9'
             cache: 'pip' # caching pip dependencies
     - run: pip install -r requirements.txt
+    - run: |
+          expr 3 + 7 > math-homework.txt
+    - name: Upload math result for job 1
+      uses: actions/upload-artifact@v3
+      with:
+          name: homework
+          path: math-homework.txt    
+        
     - name: Read and Update Last Tweeted Index
       run: |
           # Read the index of the last tweeted tip
