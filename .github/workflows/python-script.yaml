@@ -1,8 +1,10 @@
 name: Run Python Script
 
-on:
-  schedule:
-    - cron: ' * * * * * '  # Schedule to run daily at midnight UTC
+on: workflow_dispatch
+
+# on:
+#   schedule:
+#     - cron: ' * * * * * '  # Schedule to run daily at midnight UTC
 
 jobs:
   build:
