@@ -73,17 +73,17 @@ jobs:
           access_token=access_token,
           access_token_secret=access_token_secret,
           )
+          print(consumer_key)
 
+          # # Use the next tip based on the determined index
+          # tweet = tips[next_tip_index]
 
-          # Use the next tip based on the determined index
-          tweet = tips[next_tip_index]
-
-          try:
-              client.create_tweet(text=tweet)
-              echo "$next_tip_index" > "$last_tweeted_index_file"  # Update the last tweeted tip index
-              print(f"Tweeted: {tweet}")
-          except Exception as e:
-              print(f"Error posting tweet: {e}")
+          # try:
+          #     client.create_tweet(text=tweet)
+          #     echo "$next_tip_index" > "$last_tweeted_index_file"  # Update the last tweeted tip index
+          #     print(f"Tweeted: {tweet}")
+          # except Exception as e:
+          #     print(f"Error posting tweet: {e}")
         env:
           TWITTER_CONSUMER_KEY: ${{ secrets.TWITTER_CONSUMER_KEY }}
           TWITTER_CONSUMER_SECRET: ${{ secrets.TWITTER_CONSUMER_SECRET }}
