@@ -20,6 +20,30 @@ jobs:
             python-version: '3.9'
             cache: 'pip' # caching pip dependencies
     - run: pip install -r requirements.txt
+    - name: Read and Update Last Tweeted Index
+      run: |
+          # Read the index of the last tweeted tip
+          last_tweeted_index_file="last_tweeted_tip.txt"
+          last_tweeted_index=0
+          if [ -f "$last_tweeted_index_file" ]; then
+            last_tweeted_index=$(cat "$last_tweeted_index_file")
+          fi
+
+          # Debugging output
+          echo "Last tweeted index: $last_tweeted_index"
+
+          # Determine the index of the next tip to tweet
+          next_tip_index=$((last_tweeted_index + 1))
+          if [ "$next_tip_index" -ge "${#tips[@]}" ]; then
+            next_tip_index=0
+          fi
+
+          # Debugging output
+          echo "Next tip index: $next_tip_index"
+
+          # Store the index of the next tip to tweet
+          echo "$next_tip_index" > "$last_tweeted_index_file"
+      working-directory: ${{ github.workspace }}
 
     - name: Run Python Script
       run: python twitter.py
