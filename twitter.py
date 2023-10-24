@@ -4,12 +4,12 @@ import time
 import os
 
 # Set up your Twitter API credentials
-client_id = os.getenv("TWITTER_CLIENT_ID")
-client_secret = os.getenv("TWITTER_CLIENT_SECRET")
-consumer_key = os.getenv("TWITTER_CONSUMER_KEY")
-consumer_secret = os.getenv("TWITTER_CONSUMER_SECRET")
-access_token = os.getenv("TWITTER_ACCESS_TOKEN")
-access_token_secret = os.getenv("TWITTER_ACCESS_TOKEN_SECRET")
+client_id = "eEZPOGZQa1ktam82NlhWVW9kbkQ6MTpjaQ"
+client_secret = "Mpe0IS-dzc94uMy2ai_FboYTMEFtyOacrbzzzBpo9rnzFUPBMI"
+consumer_key = "pKP7JTSe41RMfBKcLaE2KCL9J"
+consumer_secret = "SWkTaUaJSEVDjrPNzP6qVJkDNnv0BfBKJor92tZIRqhZ43XGUa"
+access_token = "1715849789957406720-sWSZpkpQX5L5InypYXA967HisBTq3S"
+access_token_secret = "4Yu1nk6xetMkITbqwEVonVhdzax0n96HnoVkllNP0dKFm"
 
 # Authenticate with Twitter
 client = tweepy.Client(
