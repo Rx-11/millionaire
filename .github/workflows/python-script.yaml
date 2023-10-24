@@ -2,7 +2,7 @@ name: Run Python Script
 
 on:
   schedule:
-    - cron: '0 */4 * * * '  # Schedule to run daily at midnight UTC
+    - cron: ' 0 * * * * '  # Schedule to run daily at midnight UTC
 
 jobs:
   build:
@@ -15,7 +15,9 @@ jobs:
     - name: Set up Python
       uses: actions/setup-python@v2
       with:
-        python-version: 3.11  # Change to your desired Python version
+            python-version: '3.9'
+            cache: 'pip' # caching pip dependencies
+    - run: pip install -r requirements.txt
 
     - name: Run Python Script
       run: python twitter.py
