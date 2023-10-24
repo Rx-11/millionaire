@@ -19,18 +19,20 @@ jobs:
         with:
           python-version: 3.9
 
-      - name: Read Tips from File
+      - name: Read Tips from JSON File
         run: |
-          # Debugging output
-          echo "Working directory: $PWD"
-          ls -la
-          # Read the tips from the file
-          tips_file="millionaire_tips.txt"
-          IFS=$'\n' read -d '' -r -a tips < "$tips_file"
-
+          # Read the tips from the JSON file
+          json_file="x.json"
+          tips=($(jq -r '.millionaire_mindset_tips[]' "$json_file"))
+          
           # Debugging output
           echo "Tips: ${tips[@]}"
+        env:
+          TZ: UTC
+        working-directory: ${{ github.workspace }}
 
+      - name: Read and Update Last Tweeted Index
+        run: |
           # Read the index of the last tweeted tip
           last_tweeted_index_file="last_tweeted_tip.txt"
           last_tweeted_index=0
@@ -57,6 +59,7 @@ jobs:
       - name: Post Tweet
         run: |
           # Your tweet posting code here
+          # You can use "${tips[next_tip_index]}" to access the next tip.
         env:
           TWITTER_CONSUMER_KEY: ${{ secrets.TWITTER_CONSUMER_KEY }}
           TWITTER_CONSUMER_SECRET: ${{ secrets.TWITTER_CONSUMER_SECRET }}
