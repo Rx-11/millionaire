@@ -19,6 +19,8 @@ jobs:
         with:
           python-version: 3.9
 
+      - run: pip install -r requirements.txt
+
       - name: Read Tips from JSON File
         run: |
           # Read the tips from the JSON file
@@ -73,17 +75,18 @@ jobs:
           access_token= "1715849789957406720-sWSZpkpQX5L5InypYXA967HisBTq3S",
           access_token_secret="4Yu1nk6xetMkITbqwEVonVhdzax0n96HnoVkllNP0dKFm",
           )
+          print('a')
           
 
-          # Use the next tip based on the determined index
-          tweet = tips[next_tip_index]
+          # # Use the next tip based on the determined index
+          # tweet = tips[next_tip_index]
 
-          try:
-              client.create_tweet(text=tweet)
-              echo "$next_tip_index" > "$last_tweeted_index_file"  # Update the last tweeted tip index
-              print(f"Tweeted: {tweet}")
-          except Exception as e:
-              print(f"Error posting tweet: {e}")
+          # try:
+          #     client.create_tweet(text=tweet)
+          #     echo "$next_tip_index" > "$last_tweeted_index_file"  # Update the last tweeted tip index
+          #     print(f"Tweeted: {tweet}")
+          # except Exception as e:
+          #     print(f"Error posting tweet: {e}")
         # env:
         #   TWITTER_CONSUMER_KEY: ${{ secrets.TWITTER_CONSUMER_KEY }}
         #   TWITTER_CONSUMER_SECRET: ${{ secrets.TWITTER_CONSUMER_SECRET }}
