@@ -21,6 +21,7 @@ client = tweepy.Client(
 
 # Load tweets from GitHub Secrets
 json_content = os.getenv("TWEET_JSON")
+print(json_content)
 tweets = json.loads(json_content).get("millionaire_mindset_tips", [])
 
 # Function to save the updated JSON content to GitHub Secrets
