@@ -65,11 +65,11 @@ client = tweepy.Client(
 
 tweet = tips[next_tip_index]
 
- try:
-              client.create_tweet(text=tweet)
-              print(f"Tweeted: {tweet}")
+try:
+    client.create_tweet(text=tweet)
+    print(f"Tweeted: {tweet}")
 except Exception as e:
-               print(f"Error posting tweet: {e}")
+    print(f"Error posting tweet: {e}")
           
           
 # tweets = json.loads(json_content).get("millionaire_mindset_tips", [])
