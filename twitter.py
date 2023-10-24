@@ -1,14 +1,15 @@
 import tweepy
 import json
 import time
+import os
 
 # Set up your Twitter API credentials
-client_id = "eEZPOGZQa1ktam82NlhWVW9kbkQ6MTpjaQ"
-client_secret = "Mpe0IS-dzc94uMy2ai_FboYTMEFtyOacrbzzzBpo9rnzFUPBMI"
-consumer_key = "pKP7JTSe41RMfBKcLaE2KCL9J"
-consumer_secret = "SWkTaUaJSEVDjrPNzP6qVJkDNnv0BfBKJor92tZIRqhZ43XGUa"
-access_token = "1715849789957406720-sWSZpkpQX5L5InypYXA967HisBTq3S"
-access_token_secret = "4Yu1nk6xetMkITbqwEVonVhdzax0n96HnoVkllNP0dKFm"
+client_id = os.getenv("TWITTER_CLIENT_ID")
+client_secret = os.getenv("TWITTER_CLIENT_SECRET")
+consumer_key = os.getenv("TWITTER_CONSUMER_KEY")
+consumer_secret = os.getenv("TWITTER_CONSUMER_SECRET")
+access_token = os.getenv("TWITTER_ACCESS_TOKEN")
+access_token_secret = os.getenv("TWITTER_ACCESS_TOKEN_SECRET")
 
 # Authenticate with Twitter
 client = tweepy.Client(
@@ -18,30 +19,22 @@ client = tweepy.Client(
     access_token_secret=access_token_secret,
 )
 
-# Path to your JSON file containing tweets
-json_file_path = "x.json"
+# Load tweets from GitHub Secrets
+json_content = os.getenv("TWEET_JSON")
+tweets = json.loads(json_content).get("millionaire_mindset_tips", [])
 
-# Function to load tweets from the JSON file
-def load_tweets_from_json(file_path):
-    with open(file_path, "r") as file:
-        data = json.load(file)
-    return data.get("millionaire_mindset_tips", [])
-
-# Function to save the updated JSON file
-def save_tweets_to_json(file_path, tweets):
-    data = {"millionaire_mindset_tips": tweets}
-    with open(file_path, "w") as file:
-        json.dump(data, file, indent=4)
+# Function to save the updated JSON content to GitHub Secrets
+def save_tweets_to_secrets(new_tweets):
+    data = {"millionaire_mindset_tips": new_tweets}
+    os.environ["TWEET_JSON"] = json.dumps(data)
 
 # Main loop to post tweets at regular intervals
-
-tweets = load_tweets_from_json(json_file_path)
 tweet = tweets[0]
+
 try:
     client.create_tweet(text=tweet)
     print(f"Tweeted: {tweet}")
     tweets.remove(tweet)  # Remove the posted tweet
-    save_tweets_to_json(json_file_path, tweets)  # Update the JSON file
+    save_tweets_to_secrets(tweets)  # Update the JSON content in GitHub Secrets
 except Exception as e:
     print(f"Error posting tweet: {e}")
-          # Sleep for 4 hours before posting the next tweet
