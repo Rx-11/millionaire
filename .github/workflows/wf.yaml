@@ -67,6 +67,13 @@ jobs:
 
           # Authenticate with Twitter
           # (Insert your authentication code here)
+          client = tweepy.Client(
+          consumer_key=consumer_key,
+          consumer_secret=consumer_secret,
+          access_token=access_token,
+          access_token_secret=access_token_secret,
+          )
+
 
           # Use the next tip based on the determined index
           tweet = tips[next_tip_index]
