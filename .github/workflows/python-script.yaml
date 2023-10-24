@@ -40,7 +40,7 @@ jobs:
           next_tip_index=$((last_tweeted_index + 1))
           # if [ "$next_tip_index" -ge "${#tips[@]}" ]; then
           #   next_tip_index=0
-          fi
+          # fi
 
           # Debugging output
           echo "Next tip index: $next_tip_index"
