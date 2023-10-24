@@ -21,9 +21,15 @@ jobs:
 
       - name: Read Tips from File
         run: |
+          # Debugging output
+          echo "Working directory: $PWD"
+          ls -la
           # Read the tips from the file
           tips_file="millionaire_tips.txt"
           IFS=$'\n' read -d '' -r -a tips < "$tips_file"
+
+          # Debugging output
+          echo "Tips: ${tips[@]}"
 
           # Read the index of the last tweeted tip
           last_tweeted_index_file="last_tweeted_tip.txt"
@@ -32,11 +38,17 @@ jobs:
             last_tweeted_index=$(cat "$last_tweeted_index_file")
           fi
 
+          # Debugging output
+          echo "Last tweeted index: $last_tweeted_index"
+
           # Determine the index of the next tip to tweet
           next_tip_index=$((last_tweeted_index + 1))
           if [ "$next_tip_index" -ge "${#tips[@]}" ]; then
             next_tip_index=0
           fi
+
+          # Debugging output
+          echo "Next tip index: $next_tip_index"
 
           # Store the index of the next tip to tweet
           echo "$next_tip_index" > "$last_tweeted_index_file"
@@ -44,23 +56,7 @@ jobs:
 
       - name: Post Tweet
         run: |
-          import tweepy
-
-          # Set up your Twitter API credentials
-          # (Insert your Twitter API credentials here)
-
-          # Authenticate with Twitter
-          # (Insert your authentication code here)
-
-          # Use the next tip based on the determined index
-          tweet = tips[next_tip_index]
-
-          try:
-              client.create_tweet(text=tweet)
-              echo "$next_tip_index" > "$last_tweeted_index_file"  # Update the last tweeted tip index
-              print(f"Tweeted: {tweet}")
-          except Exception as e:
-              print(f"Error posting tweet: {e}")
+          # Your tweet posting code here
         env:
           TWITTER_CONSUMER_KEY: ${{ secrets.TWITTER_CONSUMER_KEY }}
           TWITTER_CONSUMER_SECRET: ${{ secrets.TWITTER_CONSUMER_SECRET }}
