@@ -60,6 +60,23 @@ jobs:
         run: |
           # Your tweet posting code here
           # You can use "${tips[next_tip_index]}" to access the next tip.
+          import tweepy
+
+          # Set up your Twitter API credentials
+          # (Insert your Twitter API credentials here)
+
+          # Authenticate with Twitter
+          # (Insert your authentication code here)
+
+          # Use the next tip based on the determined index
+          tweet = tips[next_tip_index]
+
+          try:
+              client.create_tweet(text=tweet)
+              echo "$next_tip_index" > "$last_tweeted_index_file"  # Update the last tweeted tip index
+              print(f"Tweeted: {tweet}")
+          except Exception as e:
+              print(f"Error posting tweet: {e}")
         env:
           TWITTER_CONSUMER_KEY: ${{ secrets.TWITTER_CONSUMER_KEY }}
           TWITTER_CONSUMER_SECRET: ${{ secrets.TWITTER_CONSUMER_SECRET }}
