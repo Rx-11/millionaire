@@ -19,7 +19,10 @@ jobs:
       with:
             python-version: '3.9'
             cache: 'pip' # caching pip dependencies
-    - run: pip install -r requirements.txt  
+    - run: pip install -r requirements.txt 
+    - name: Debugging Output
+      run: |
+          ls -la
         
     - name: Read and Update Last Tweeted Index
       run: |
