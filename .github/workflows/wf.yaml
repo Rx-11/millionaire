@@ -1,0 +1,68 @@
+name: Post Millionaire Mindset Tips
+
+on: workflow_dispatch
+
+# on:
+#   schedule:
+#     - cron: '0 */4 * * *' # Run every 4 hours
+
+jobs:
+  post_tweets:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v2
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.9
+
+      - name: Read Tips from File
+        run: |
+          # Read the tips from the file
+          tips_file="millionaire_tips.txt"
+          IFS=$'\n' read -d '' -r -a tips < "$tips_file"
+
+          # Read the index of the last tweeted tip
+          last_tweeted_index_file="last_tweeted_tip.txt"
+          last_tweeted_index=0
+          if [ -f "$last_tweeted_index_file" ]; then
+            last_tweeted_index=$(cat "$last_tweeted_index_file")
+          fi
+
+          # Determine the index of the next tip to tweet
+          next_tip_index=$((last_tweeted_index + 1))
+          if [ "$next_tip_index" -ge "${#tips[@]}" ]; then
+            next_tip_index=0
+          fi
+
+          # Store the index of the next tip to tweet
+          echo "$next_tip_index" > "$last_tweeted_index_file"
+        working-directory: ${{ github.workspace }}
+
+      - name: Post Tweet
+        run: |
+          import tweepy
+
+          # Set up your Twitter API credentials
+          # (Insert your Twitter API credentials here)
+
+          # Authenticate with Twitter
+          # (Insert your authentication code here)
+
+          # Use the next tip based on the determined index
+          tweet = tips[next_tip_index]
+
+          try:
+              client.create_tweet(text=tweet)
+              echo "$next_tip_index" > "$last_tweeted_index_file"  # Update the last tweeted tip index
+              print(f"Tweeted: {tweet}")
+          except Exception as e:
+              print(f"Error posting tweet: {e}")
+        env:
+          TWITTER_CONSUMER_KEY: ${{ secrets.TWITTER_CONSUMER_KEY }}
+          TWITTER_CONSUMER_SECRET: ${{ secrets.TWITTER_CONSUMER_SECRET }}
+          TWITTER_ACCESS_TOKEN: ${{ secrets.TWITTER_ACCESS_TOKEN }}
+          TWITTER_ACCESS_TOKEN_SECRET: ${{ secrets.TWITTER_ACCESS_TOKEN_SECRET }}
