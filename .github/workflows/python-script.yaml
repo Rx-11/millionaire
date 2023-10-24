@@ -44,7 +44,6 @@ jobs:
 
           # Store the index of the next tip to tweet
           echo "$next_tip_index" > "$last_tweeted_index_file"
-      working-directory: ${{ github.workspace }}
     - name: Commit changes
       run: |
         git config --global user.email "triksters123@gmail.com"
