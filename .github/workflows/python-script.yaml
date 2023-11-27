@@ -60,4 +60,11 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} 
 
     - name: Run Python Script
+      env: 
+            TAT: ${{ secrets.TWITTER_ACCESS_TOKEN }}
+            TATS: ${{ secrets.TWITTER_ACCESS_TOKEN_SECRET }}
+            TCID: ${{ secrets.TWITTER_CLIENT_ID }}
+            TCIDS: ${{ secrets.TWITTER_CLIENT_SECRET }}
+            TCK: ${{ secrets.TWITTER_CONSUMER_KEY }}
+            TCS: ${{ secrets.TWITTER_CONSUMER_SECRET }}
       run: python twitter.py
