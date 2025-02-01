@@ -3,8 +3,8 @@ name: Run Python Script
 # on: workflow_dispatch
 
 on:
-  schedule:
-    - cron: ' 0 */2 * * * '  
+  # schedule:
+  #   - cron: ' 0 */2 * * * '  
 
 
 jobs:
